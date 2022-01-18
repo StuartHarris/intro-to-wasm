@@ -1,53 +1,5 @@
 # WebAssembly demo
 
-## Basic Rust — "hello world!"
-
-1. Create new bin project: `cargo new hello`
-2. `cd hello`
-3. Build: `cargo build`
-4. Run: `./target/debug/hello`
-5. `ls -la ./target/debug/hello`
-6. `file ./target/debug/hello`
-
-## Compile to Wasm — "hello world!"
-
-1. Build for Wasm: `cargo build --target wasm32-unknown-unknown`
-2. `ls -la ./target/wasm32-unknown-unknown/debug/hello.wasm`
-3. `file ./target/wasm32-unknown-unknown/debug/hello.wasm`
-4. `wasmer ./target/wasm32-unknown-unknown/debug/hello.wasm` — OhOh!
-
-## Compile with WASI — "hello world!"
-
-1. Build for WASI: `cargo build --target wasm32-wasi`
-2. `wasmer ./target/wasm32-wasi/debug/hello.wasm`
-3. `wasmtime ./target/wasm32-wasi/debug/hello.wasm`
-4. `wasm3 ./target/wasm32-wasi/debug/hello.wasm`
-5. `wasmedge ./target/wasm32-wasi/debug/hello.wasm`
-
-## Wasm "add" function
-
-1. Create new lib project: `cargo new --lib add`
-2. Test: `cargo test`
-3. Add `add` function:
-
-   ```rust
-   #[no_mangle]
-   pub extern "C" fn add(a: i32, b: i32) -> i32 {
-     a + b
-   }
-   ```
-
-4. To Cargo.toml:
-
-   ```toml
-   [lib]
-   crate-type = ["cdylib"]
-   ```
-
-5. Build: `cargo build --target wasm32-unknown-unknown`
-6. Run: `wasm3 --func add ./target/wasm32-unknown-unknown/debug/add.wasm 2 3`
-7. Or: `wasmer ./target/wasm32-unknown-unknown/debug/add.wasm -i add 2 3`
-
 ## WebAssembly Text (wat)
 
 1. `mkdir wat; cd wat`
@@ -111,6 +63,54 @@
    ```
 
 2. Run: `python3 -m http.server 10000`
+
+## Basic Rust — "hello world!"
+
+1. Create new bin project: `cargo new hello`
+2. `cd hello`
+3. Build: `cargo build`
+4. Run: `./target/debug/hello`
+5. `ls -la ./target/debug/hello`
+6. `file ./target/debug/hello`
+
+## Compile to Wasm — "hello world!"
+
+1. Build for Wasm: `cargo build --target wasm32-unknown-unknown`
+2. `ls -la ./target/wasm32-unknown-unknown/debug/hello.wasm`
+3. `file ./target/wasm32-unknown-unknown/debug/hello.wasm`
+4. `wasmer ./target/wasm32-unknown-unknown/debug/hello.wasm` — OhOh!
+
+## Compile with WASI — "hello world!"
+
+1. Build for WASI: `cargo build --target wasm32-wasi`
+2. `wasmer ./target/wasm32-wasi/debug/hello.wasm`
+3. `wasmtime ./target/wasm32-wasi/debug/hello.wasm`
+4. `wasm3 ./target/wasm32-wasi/debug/hello.wasm`
+5. `wasmedge ./target/wasm32-wasi/debug/hello.wasm`
+
+## Wasm "add" function
+
+1. Create new lib project: `cargo new --lib add`
+2. Test: `cargo test`
+3. Add `add` function:
+
+   ```rust
+   #[no_mangle]
+   pub extern "C" fn add(a: i32, b: i32) -> i32 {
+     a + b
+   }
+   ```
+
+4. To Cargo.toml:
+
+   ```toml
+   [lib]
+   crate-type = ["cdylib"]
+   ```
+
+5. Build: `cargo build --target wasm32-unknown-unknown`
+6. Run: `wasm3 --func add ./target/wasm32-unknown-unknown/debug/add.wasm 2 3`
+7. Or: `wasmer ./target/wasm32-unknown-unknown/debug/add.wasm -i add 2 3`
 
 ## `wasm-bindgen` and `wasm-pack`
 
