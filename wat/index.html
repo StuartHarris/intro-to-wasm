@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hello</title>
+  </head>
+  <body>
+    <script>
+      (async () => {
+        var obj = await WebAssembly.instantiateStreaming(fetch("./add.wasm"));
+        alert(obj.instance.exports.add(3, 2));
+      })();
+    </script>
+  </body>
+</html>
